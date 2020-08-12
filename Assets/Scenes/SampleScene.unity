@@ -152,8 +152,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc992a7c99c72e148a71eaafc9f62f3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  totalHealth: 0
-  speed: 0
+  totalHealth: 50
+  speed: 3
+  power: 100
 --- !u!4 &72306486
 Transform:
   m_ObjectHideFlags: 0

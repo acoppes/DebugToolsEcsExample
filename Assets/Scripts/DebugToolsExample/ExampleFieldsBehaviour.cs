@@ -6,5 +6,8 @@ namespace DebugToolsExample
     {
         public float totalHealth;
         public float speed;
+
+        [SerializeField]
+        private int power;
     }
 }

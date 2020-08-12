@@ -35,7 +35,6 @@ namespace DebugToolsExample
                 .ForEach(delegate(Entity entity, DebugEntitySystemComponent debug, ref HealthComponent health)
                 {
                     debug.debug.entity = entity;
-                    debug.debug.healthPercentage = health.current / (float) health.total;
                     debug.debug.current = health.current;
                     debug.debug.total = health.total;
                 });

@@ -6,10 +6,8 @@ namespace DebugToolsExample
 {
     public class DebugEntityMonoBehaviour : MonoBehaviour
     {
-        public float current;
-        public float total;
-        
-        public float healthPercentage;
+        public int current;
+        public int total;
         
         public Entity entity;
     }
