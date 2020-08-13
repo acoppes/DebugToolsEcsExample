@@ -8,8 +8,20 @@ namespace DebugToolsExample
     {
         public int current;
         public int total;
+
+        [NonSerialized]
+        public float attackRange;
         
         public Entity entity;
+
+        private void OnDrawGizmos()
+        {
+            if (attackRange > 0)
+            {
+                Gizmos.color = Color.red;
+                Gizmos.DrawWireSphere(transform.position, attackRange);
+            }
+        }
     }
     
     public struct DebugEntitySystemComponent : ISystemStateSharedComponentData, IEquatable<DebugEntitySystemComponent>

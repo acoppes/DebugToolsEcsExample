@@ -1,5 +1,7 @@
 ﻿using System;
 using Unity.Entities;
+using Unity.Mathematics;
+using Unity.Transforms;
 using UnityEngine;
 
 namespace DebugToolsExample
@@ -22,6 +24,7 @@ namespace DebugToolsExample
                     var go = new GameObject($"DebugFor-{name}");
                     
                     var debug = go.AddComponent<DebugEntityMonoBehaviour>();
+                    debug.entity = entity;
 
                     PostUpdateCommands.AddSharedComponent(entity, new DebugEntitySystemComponent
                     {
@@ -34,10 +37,24 @@ namespace DebugToolsExample
                 .WithAll<UnitComponent, DebugEntitySystemComponent, HealthComponent>()
                 .ForEach(delegate(Entity entity, DebugEntitySystemComponent debug, ref HealthComponent health)
                 {
-                    debug.debug.entity = entity;
                     debug.debug.current = health.current;
                     debug.debug.total = health.total;
                 });
+            
+            Entities
+                .WithAll<UnitComponent, DebugEntitySystemComponent, AttackComponent>()
+                .ForEach(delegate(Entity entity, DebugEntitySystemComponent debug, ref AttackComponent attack)
+                {
+                    debug.debug.attackRange = attack.range;
+                });
+            
+            Entities
+                .WithAll<UnitComponent, DebugEntitySystemComponent, Translation>()
+                .ForEach(delegate(Entity entity, DebugEntitySystemComponent debug, ref Translation t)
+                {
+                    debug.debug.transform.position = t.Value;
+                });
+
             
             // destroy the debug stuff...
             Entities
@@ -57,7 +74,7 @@ namespace DebugToolsExample
         // Update is called once per frame
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.Space))
+            if (Input.GetKeyUp(KeyCode.Alpha1))
             {
                 var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
                 var e1 = entityManager.CreateEntity(ComponentType.ReadOnly<UnitComponent>());
@@ -72,6 +89,36 @@ namespace DebugToolsExample
                 });
 
             }
+            
+            if (Input.GetKeyUp(KeyCode.Alpha2))
+            {
+                var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+                var e1 = entityManager.CreateEntity(ComponentType.ReadOnly<UnitComponent>());
+
+                entityManager.AddComponentData(e1, new AttackComponent()
+                {
+                    range = UnityEngine.Random.Range(0.5f, 2.0f)
+                });
+            }
+            
+            if (Input.GetKeyUp(KeyCode.Alpha3))
+            {
+                var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+                var e1 = entityManager.CreateEntity(ComponentType.ReadOnly<UnitComponent>());
+
+                entityManager.AddComponentData(e1, new AttackComponent()
+                {
+                    range = UnityEngine.Random.Range(0.5f, 2.0f)
+                });
+                
+                entityManager.AddComponentData(e1, new Translation()
+                {
+                    Value = new float3(UnityEngine.Random.Range(-2, 2), 
+                        UnityEngine.Random.Range(-2, 2), 0)
+                });
+
+            }
+            
         }
     }
 }

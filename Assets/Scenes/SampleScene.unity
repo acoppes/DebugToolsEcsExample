@@ -495,7 +495,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 80}
+  m_SizeDelta: {x: 300, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2107573285
 MonoBehaviour:
@@ -530,7 +530,12 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: PRESS SPACE TO CREATE ENTITIES
+  m_Text: 'PRESS 1 - Entity with Health
+
+    PRESS 2 - Entity with Attack
+
+    PRESS
+    3 - Entity with Translation'
 --- !u!222 &2107573286
 CanvasRenderer:
   m_ObjectHideFlags: 0

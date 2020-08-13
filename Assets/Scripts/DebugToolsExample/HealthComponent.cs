@@ -9,6 +9,11 @@ namespace DebugToolsExample
         public int total;
     }
 
+    public struct AttackComponent : IComponentData
+    {
+        public float range;
+    }
+
     public struct Damage : IComponentData
     {
         public Entity target;

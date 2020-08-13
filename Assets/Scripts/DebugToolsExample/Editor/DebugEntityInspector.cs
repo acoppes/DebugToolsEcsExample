@@ -16,13 +16,16 @@ namespace DebugToolsExample.Editor
             var entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
 
             EditorGUI.BeginChangeCheck();
-
+            
             var newCurrent = EditorGUILayout.IntField("Current Health", debug.current);
             var newTotal = EditorGUILayout.IntField("Total Health", debug.total);
             
-            EditorGUI.BeginDisabledGroup(true);
-            EditorGUILayout.IntField("Percentage", debug.current * 100 / debug.total);
-            EditorGUI.EndDisabledGroup();
+            if (debug.total > 0)
+            {
+                EditorGUI.BeginDisabledGroup(true);
+                EditorGUILayout.IntField("Percentage", debug.current * 100 / debug.total);
+                EditorGUI.EndDisabledGroup();
+            }
             
             if (EditorGUI.EndChangeCheck())
             {
